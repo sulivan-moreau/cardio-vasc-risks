@@ -2,7 +2,7 @@
 
 
 ## Environnement virtuel
-Créé avec l’outil uv développé par Astral (une alternative ultra-rapide à pip et venv).
+Créé avec l’outil [uv](https://docs.astral.sh/uv/) développé par Astral (une alternative ultra-rapide à pip et venv).
 
 1. **Installer uv :**
 `pip install uv`
