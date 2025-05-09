@@ -1,7 +1,8 @@
-Timestamp,FichierDonnees,Accuracy,Precision,Recall,F1-Score,True Negative,False Positive,False Negative,True Positive
-05-09 10:16:58,cardio_optimized.csv,0.7238,0.7264,0.7233,0.7227,5395,1519,2269,4530
-05-09 10:42:11,cardio_optimized.csv,0.7257,0.7285,0.7249,0.7243,5462,1494,2267,4490
-05-09 10:48:00,cardio_optimized.csv,0.7262,0.7286,0.7258,0.7252,5388,1522,2233,4570
-05-09 10:51:43,cardio_optimized.csv,0.7243,0.7286,0.7244,0.723,5426,1422,2359,4506
-05-09 11:48:33,cardio_optimized.csv,0.7303,0.7331,0.7299,0.7292,5430,1468,2231,4584
-05-09 12:13:16,cardio_optimized.csv,0.7249,0.7267,0.7243,0.724,5376,1573,2199,4565
+Timestamp,FichierDonnees,max_iter,penalty,solver,C,Accuracy,Precision,Recall,F1-Score,True Negative,False Positive,False Negative,True Positive
+05-09 14:00:19,cardio_optimized.csv,default,default,default,default,0.71,0.7123,0.7092,0.7087,5328,1621,2356,4408
+05-09 14:00:54,cardio_optimized.csv,1000,l2,lbfgs,default,0.7249,0.7267,0.7243,0.724,5376,1573,2199,4565
+05-09 14:01:18,cardio_optimized.csv,2000,l2,lbfgs,default,0.7257,0.7275,0.7251,0.7248,5379,1570,2191,4573
+05-09 14:01:48,cardio_optimized.csv,2000,default,lbfgs,default,0.7257,0.7275,0.7251,0.7248,5379,1570,2191,4573
+05-09 14:32:59,cardio_optimized.csv,2000,default,default,default,0.7257,0.7275,0.7251,0.7248,5379,1570,2191,4573
+
+05-09 14:44:19,cardio_train_clean.csv,2000,default,default,default,0.7184,0.7198,0.7177,0.7175,5307,1642,2220,4544
