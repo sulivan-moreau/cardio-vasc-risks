@@ -1,21 +1,27 @@
-import os
-import csv
-from datetime import datetime
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 from sklearn.model_selection import train_test_split
+
+# Pour enregistrer les résultat
+import os
+import csv
+from datetime import datetime
 
 MAX_ITER = 1000
 DF_PATH = "data/cardio_optimized.csv"
 RESULT_PATH = "../results.csv"
 
-# --- Pour utiliser dans le notebook ---
-# DF_PATH ="data/cardio_optimized.csv"
+"""
+ --- Pour utiliser dans le notebook ---
 
-# df = pd.read_csv(DF_PATH, sep=";")
-# X = df.drop(columns=["cardio"])
-# y = df["cardio"]
-# execute_model_and_save_score(X, y, max_iter=100)
+DF_PATH ="data/cardio_optimized.csv"
+
+df = pd.read_csv(DF_PATH, sep=";")
+X = df.drop(columns=["cardio"])
+y = df["cardio"]
+execute_model_and_save_score(X, y, max_iter=100)
+
+"""
 
 def results(result_file, ligne, entetes=None):
     try:
@@ -29,12 +35,12 @@ def results(result_file, ligne, entetes=None):
     except Exception as e:
         print(f"❌ Erreur d'enregistrement CSV : {e}")
 
-def execute_model_and_save_score(X, y, max_iter=1000):
+def execute_model_and_save_score(X, y):
     data_name = os.path.basename(DF_PATH)
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    model = LogisticRegression(max_iter=max_iter)
+    model = LogisticRegression(max_iter=MAX_ITER)
     model.fit(X_train, y_train)
 
     # Évaluation
