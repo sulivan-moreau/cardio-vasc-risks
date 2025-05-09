@@ -1,2 +1,5 @@
 Timestamp,FichierDonnees,Accuracy,Precision,Recall,F1-Score,True Negative,False Positive,False Negative,True Positive
-05-09 09:45:58,cardio_optimized.csv,0.7262,0.729,0.7263,0.7255,5345,1503,2251,4614
+05-09 10:16:58,cardio_optimized.csv,0.7238,0.7264,0.7233,0.7227,5395,1519,2269,4530
+05-09 10:42:11,cardio_optimized.csv,0.7257,0.7285,0.7249,0.7243,5462,1494,2267,4490
+05-09 10:48:00,cardio_optimized.csv,0.7262,0.7286,0.7258,0.7252,5388,1522,2233,4570
+05-09 10:51:43,cardio_optimized.csv,0.7243,0.7286,0.7244,0.723,5426,1422,2359,4506
