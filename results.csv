@@ -6,3 +6,10 @@ Timestamp,FichierDonnees,max_iter,penalty,solver,C,Accuracy,Precision,Recall,F1-
 05-09 14:32:59,cardio_optimized.csv,2000,default,default,default,0.7257,0.7275,0.7251,0.7248,5379,1570,2191,4573
 
 05-09 14:44:19,cardio_train_clean.csv,2000,default,default,default,0.7184,0.7198,0.7177,0.7175,5307,1642,2220,4544
+
+05-09 20:52:07,cardio_light.csv,2000,default,default,default,0.7237,0.7246,0.7232,0.7231,5281,1668,2121,4643
+05-09 20:53:35,cardio_light.csv,2000,l2,lbfgs,default,0.7237,0.7246,0.7232,0.7231,5281,1668,2121,4643
+05-09 20:58:34,cardio_light.csv,default,l1,liblinear,default,0.7233,0.7241,0.7228,0.7227,5273,1676,2119,4645
+05-09 20:59:59,cardio_light.csv,default,l1,saga,default,0.5057,0.5052,0.5052,0.5046,3790,3159,3619,3145
+05-09 21:00:49,cardio_light.csv,default,l2,newton-cg,default,0.7233,0.7242,0.7228,0.7227,5273,1676,2118,4646
+05-09 21:01:38,cardio_light.csv,2000,l2,newton-cg,default,0.7233,0.7242,0.7228,0.7227,5273,1676,2118,4646
