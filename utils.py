@@ -40,7 +40,7 @@ RESULT_PATH = "../results.csv"
 EN_TETES = [
     'Timestamp', 'FichierDonnees',
     'max_iter', 'penalty', 'solver', 'C',
-    'Accuracy', 'Precision', 'Recall', 'F1-Score',
+    'Accuracy', 'Precision', 'Recall', 'Recall 1', 'F1-Score',
     'True Negative', 'False Positive', 'False Negative', 'True Positive'
 ]
 
@@ -74,7 +74,7 @@ def execute_model_and_save_score(X, y, df_path,
     data_name = os.path.basename(df_path)
 
     # Split des données
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
 
     # Création dynamique des arguments non None de LogisticRegression
     model_args = {
@@ -101,6 +101,7 @@ def execute_model_and_save_score(X, y, df_path,
 
     precision = round(rapport['macro avg']['precision'], 4)
     recall = round(rapport['macro avg']['recall'], 4)
+    recall_1 = round(rapport['1']['recall'], 4)
     f1 = round(rapport['macro avg']['f1-score'], 4)
 
 
@@ -122,6 +123,7 @@ def execute_model_and_save_score(X, y, df_path,
         'Accuracy': round(accuracy, 4),
         'Precision': precision,
         'Recall': recall,
+        'Recall 1': recall_1,
         'F1-Score': f1,
         'True Negative': tn,
         'False Positive': fp,
