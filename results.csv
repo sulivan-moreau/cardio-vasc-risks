@@ -21,3 +21,4 @@ Timestamp,FichierDonnees,max_iter,penalty,solver,C,Accuracy,Precision,Recall,Rec
 06-10 15:11:00,cardio_optimized.csv,1000,l2,liblinear,200,0.7216,0.7229,0.7212,0.6789,0.7209,5287,1639,2179,4608
 06-10 15:58:17,cardio_light_std.csv,1000,l2,liblinear,150,0.7182,0.7188,0.7178,0.686,0.7177,5192,1734,2131,4656
 06-10 16:03:16,cardio_light_std.csv,1000,l2,liblinear,200,0.7182,0.7188,0.7178,0.686,0.7177,5192,1734,2131,4656
+06-11 10:17:01,cardio_light_std.csv,1000,l2,liblinear,200,0.7182,0.7188,0.7178,0.686,0.7177,5192,1734,2131,4656
