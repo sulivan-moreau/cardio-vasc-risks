@@ -1,8 +1,9 @@
 # cardio-vasc-risks
 
 
-## Environnement virtuel
-Créé avec l’outil [uv](https://docs.astral.sh/uv/) développé par Astral (une alternative ultra-rapide à pip et venv).
+## Workflow
+---
+- Créer l'**environnement virtuel** avec l’outil [uv](https://docs.astral.sh/uv/) développé par Astral (une alternative ultra-rapide à pip et venv).
 
 1. **Installer uv :**
 `pip install uv`
@@ -10,7 +11,42 @@ Créé avec l’outil [uv](https://docs.astral.sh/uv/) développé par Astral (u
 2. **Activer l'environnement virtuel et installer les dépendances :**
 `uv sync`
 
-## Jeu de données
+---
+
+1. `cleaning.ipynb`
+- **Entrée :**  Sélectionner le jeu de donnée original : `cardio_train.csv` 
+- Executer
+- **Sortie :** `cardio_train_clean.csv`<br>
+
+---
+2. `preprocessing.ipynb`
+- **Entrée :**  Sélectionner le jeu de donnée nettoyé `cardio_train_clean.csv`
+- Choisir les cellules à exécuter.
+- **Plusieurs sorties possibles :**<br>
+`cardio_optimized.csv`
+création des variables
+'imc', 'pressure', 'risk_behavior', 'age_risk', 'imc_pressure','chole_gluc'<br>
+`cardio_light.csv`
+suppression de variables redondante
+'height', 'weight', 'ap_lo', 'ap_hi'<br>
+`cardio_prepro_light_std.csv`
+standardisation de 'age' et 'age_risk'
+---
+3. `modelisation.ipynb`
+Fonctionne en appelant `utils`
+- **Entrée :**  Sélectionner le jeu de donnée
+`DF_PATH = "../data/cardio_prepro_light_std.csv"`
+- Teste different hyperparamètres et enregistre les combinaisons qui donnent le meilleur recall de la classe 1 
+- **Sortie :** 
+`results.csv`
+archive les jeux de données, paramètres et résultats des modèles entrainés
+`best_model_grid`
+enregistre les meilleurs paramètres trouvé par `GridSearchCV`
+`best_model_random`
+enregistre les meilleurs paramètres trouvé par `RandomSearchCV`
+
+
+## Jeu de données original
 
 **variable indépendantes**
 |Anglais|Français|Signification|besoin métier|
