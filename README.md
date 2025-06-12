@@ -70,8 +70,8 @@ enregistre les meilleurs paramètres trouvé par `RandomSearchCV`
 
 
 ---
-
-### Activité physique
+## Analyse & Preprocessing
+#### Activité physique
 
 |Variable|interpretation| valeur élevé =|
 |:-|:-|:-|
@@ -88,17 +88,15 @@ Nous alons donc intervertir les 0 et 1 de `active` pour respecter la même logiq
 
 
 ----
-## gender
-2 = homme<br>
+#### gender | male female
+2 = homme
 1 = femme<br>
-Mais il s'agit d'une donnée Cardinale, pas ordinale><br>
-Nous utilisons OneHotEncoder pour remplacer `gender` par `male`et `female`.
+Il s'agit d'une donnée **Cardinale**, pas **ordinale**
+Nous utilisons **OneHotEncoder** pour remplacer `gender` par `male`et `female`.
 
 
 ---
-## IMC
-
-### Indice de Masse Corporelle
+#### IMC | Indice de Masse Corporelle
 
 Calcul de l'IMC :
 
@@ -118,9 +116,7 @@ Catégorisation médicale simplifiée :
 
 
 ---
-## pressure
-
-### Tension artérielle
+#### pressure | Tension artérielle
 
 | Diastolique (`ap_lo`) | Systolique (`ap_hi`) | Interprétation        | Code |
 | -------------------- | --------------------- | --------------------- | ---- |
