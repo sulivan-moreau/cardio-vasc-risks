@@ -62,7 +62,67 @@ def results(result_file, ligne, entetes=None):
 def to_str_or_default(value):
     return "default" if value is None else value
 
-def execute_model_and_save_score(X, y, df_path,
+def execute_model(X,
+                  y,
+                  model=None,
+                  max_iter=MAX_ITER,
+                  penalty=PENALTY,
+                  solver=SOLVER,
+                  C=C,
+                  fit_intercept=FIT_INTERCEPT,
+                  class_weight=CLASS_WEIGHT):
+    """
+    Entraîne un modèle (ou exécute un modèle déjà entraîné) et affiche les scores.
+    """
+    # Split des données
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
+
+    # Utilise le modèle fourni, ou crée un modèle avec les paramètres donnés
+    if model is None:
+        model_args = {
+            k: v for k, v in {
+                'max_iter': max_iter,
+                'penalty': penalty,
+                'solver': solver,
+                'C': C,
+                'fit_intercept': fit_intercept,
+                'class_weight': class_weight
+            }.items() if v is not None
+        }
+        model = LogisticRegression(**model_args)
+        model.fit(X_train, y_train)
+
+    # Prédictions
+    y_pred = model.predict(X_test)
+    y_proba = model.predict_proba(X_test)[:, 1]
+
+    # Évaluation
+    accuracy = accuracy_score(y_test, y_pred)
+    rapport = classification_report(y_test, y_pred, output_dict=True)
+    cm = confusion_matrix(y_test, y_pred)
+
+    precision = round(rapport['macro avg']['precision'], 4)
+    recall = round(rapport['macro avg']['recall'], 4)
+    recall_1 = round(rapport['1']['recall'], 4)
+    f1 = round(rapport['macro avg']['f1-score'], 4)
+
+    tn, fp, fn, tp = cm.ravel() if cm.shape == (2, 2) else (None, None, None, None)
+
+    # Affichage
+    print("✅ Accuracy :", round(accuracy, 4))
+    print("📊 Rapport de classification :\n", classification_report(y_test, y_pred), "\n")
+    print("🧱 Matrice de confusion :\n", cm, "\n")
+    print("Precision : ", precision)
+    print("Recall : ", recall)
+    print("Recall 1 : ", recall_1)
+    print("F 1 : ", f1)
+
+    return y_test, y_pred, y_proba, X_test
+
+
+def execute_model_and_save_score(X, 
+                                 y, 
+                                 model=None,
                                  max_iter=MAX_ITER,
                                  penalty=PENALTY,
                                  solver=SOLVER,
@@ -71,25 +131,23 @@ def execute_model_and_save_score(X, y, df_path,
                                  class_weight=CLASS_WEIGHT):
     """Entraîne un modèle, affiche les scores et sauvegarde les résultats dans un CSV."""
 
-    data_name = os.path.basename(df_path)
-
     # Split des données
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
 
     # Création dynamique des arguments non None de LogisticRegression
-    model_args = {
-        k: v for k, v in {
-            'max_iter': max_iter,
-            'penalty': penalty,
-            'solver': solver,
-            'C': C,
-            'fit_intercept': fit_intercept,
-            'class_weight': class_weight
-        }.items() if v is not None
-    }
-
-    model = LogisticRegression(**model_args)
-    model.fit(X_train, y_train)
+    if model is None:
+        model_args = {
+            k: v for k, v in {
+                'max_iter': max_iter,
+                'penalty': penalty,
+                'solver': solver,
+                'C': C,
+                'fit_intercept': fit_intercept,
+                'class_weight': class_weight
+            }.items() if v is not None
+        }
+        model = LogisticRegression(**model_args)
+        model.fit(X_train, y_train)
 
     # Prédiction
     y_pred = model.predict(X_test)
@@ -112,14 +170,27 @@ def execute_model_and_save_score(X, y, df_path,
     print("📊 Rapport de classification :\n", classification_report(y_test, y_pred))
     print("🧱 Matrice de confusion :\n", cm)
 
+    # Récupérer les paramètres du modèle si possible, sinon valeurs par défaut
+    if model is not None:
+        params = model.get_params()
+        max_iter_val = params.get('max_iter', 'default')
+        penalty_val = params.get('penalty', 'default')
+        solver_val = params.get('solver', 'default')
+        C_val = params.get('C', 'default')
+    else:
+        max_iter_val = to_str_or_default(max_iter)
+        penalty_val = to_str_or_default(penalty)
+        solver_val = to_str_or_default(solver)
+        C_val = to_str_or_default(C)
+
     # Sauvegarde .csv
     result_line = {
         'Timestamp': datetime.now().strftime('%m-%d %H:%M:%S'),
-        'FichierDonnees': data_name,
-        'max_iter': to_str_or_default(max_iter),
-        'penalty': to_str_or_default(penalty),
-        'solver': to_str_or_default(solver),
-        'C': to_str_or_default(C),
+        # 'FichierDonnees': data_name,
+        'max_iter': to_str_or_default(max_iter_val),
+        'penalty': to_str_or_default(penalty_val),
+        'solver': to_str_or_default(solver_val),
+        'C': to_str_or_default(C_val),
         'Accuracy': round(accuracy, 4),
         'Precision': precision,
         'Recall': recall,
