@@ -126,3 +126,13 @@ Catégorisation médicale simplifiée :
 
 
 Si la systolique ou la diastolique dépasse un seuil, on prend la catégorie la plus élevée.
+
+
+
+### modelisation.ipynb
+
+execute_model : exécute un modèle (LogisticRegression par défaut) et renvoie les prédictions, scores et modèle.
+
+save_results : enregistre les scores et les hyperparamètres du modèle dans un fichier CSV (incluant le nom du fichier source de données).
+
+save_grid_results : enregistre les résultats complets d’un GridSearchCV.
